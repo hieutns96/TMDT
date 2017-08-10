@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Ioc.Modules.Ninject</id>
+    <version>1.1.3</version>
+    <title>Ioc.Modules.Ninject</title>
+    <authors>Martin Halliday</authors>
+    <owners>Martin Halliday</owners>
+    <licenseUrl>http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</licenseUrl>
+    <projectUrl>https://github.com/Bikeman868/Ioc.Modules</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Configures packages using Ioc.Modules as a Ninject module</description>
+    <summary>Provides a Ninject module that will probe assemblies for IoC dependencies 
+      declared with Ioc.Modules package and registers those dependencies with 
+      Ninject.</summary>
+    <releaseNotes>Added support registering instances</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>IOC modular package library Ninject</tags>
+    <dependencies>
+      <dependency id="Ninject" version="3.2.2" />
+      <dependency id="Ioc.Modules" version="1.1.3" />
+    </dependencies>
+  </metadata>
+</package>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="wthEntities-Web.config Connection String" description="wthEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/TMDT.csdl|res://*/TMDT.ssdl|res://*/TMDT.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=.\SQLEXPRESS;initial catalog=wth;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\DELL\\Desktop\\Hieu_TMDT\\Hieu_TMDT\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='wthEntities']/@connectionString" />
+  </parameter>
+</parameters>

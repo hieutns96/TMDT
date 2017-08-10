@@ -1,0 +1,108 @@
+﻿
+@model Hieu_TMDT.Models.InfoView
+@using Hieu_TMDT.Models
+@{
+    ViewBag.Title = "ViewCatalog";
+    Layout = "~/Views/Shared/_Layout_temp.cshtml";
+}
+@{
+    string encode = (Path.GetFileName(Request.Url.AbsolutePath)); //đường dẫn hiện tại
+    NhaSachRepository ns = new NhaSachRepository();
+    if (encode == "ViewCatalog" || encode == "") { encode = "VEVOU0FDSD0=1"; }
+    @*<h1>@encode</h1>*@
+}
+
+<div class="panel panel-default" style="left:10px; right:10px;background-color:antiquewhite;">
+
+    <div class="panel-heading">
+        <center>
+            <h3 class="panel-title" style="font-size:20px;">Sản phẩm</h3>
+            <button id="btnsearch" class="btn btn-warning"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>  <a href="/SearchADV/SearchADV">Tìm kiếm nâng cao </a>
+        </center>
+    </div>
+
+
+    <div class="panel-body" style="width:900px; margin-left:auto;margin-right:auto;">
+        <div class="panel panel-footer" style="margin-bottom:5px; border-bottom: 1px solid #dddddd;">
+            <center>
+                <div style="padding:3px;" data-bind="foreach:listpage">
+                    <span data-bind="text:PageNum,click:$parent.PageClick, attr:{id:PageNum}" style="cursor:pointer; padding:5px; font-size:15px;"></span>
+                </div>
+                <button data-bind="enable:preve,click:Prev" class="btn btn-default">
+                    <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
+                </button>
+                <button data-bind="enable:nexte,click:Next" class="btn btn-default">
+                    <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                </button>
+            </center>
+        </div>
+        <div data-bind="foreach:listbook, visible:rvsb" id="result">
+            <div @*class="row"*@>
+
+                <!-- n sản phẩm -->
+                <div style="margin:10px; float:left; padding-left:5px; padding-right:5px;border-radius:5px; border:1px solid #dccccc;">
+                    <div style="height:340px; text-align:center;">
+                        <a data-bind="click:$parent.GoToProduct" style="cursor:pointer;">
+                            <img data-bind="attr:{src:'/Image/Sach/'+AnhBia()}" style="width:180px; height:230px; margin-top:9px;" class="img-thumbnail" />
+                        </a>
+                        <h5 style="width:180px;" class="text-primary" data-bind="text:TenSach"></h5>
+                        <p>Giá bán:<span data-bind="text:GiaBan"></span></p>
+
+                    </div>
+                    <div style="margin-bottom:5px;">
+                        <button type="submit" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Xem chi tiết sản phẩm" data-bind="click:$parent.GoToProduct">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                            Xem
+                        </button>
+                        @{if (Session["nguoidung"] != null)
+                        {
+                            <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Mua sản phẩm" data-bind="click:$parent.AddCartClick">
+                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                Mua hàng
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Mua sản phẩm" data-bind="click:$parent.Sorry">
+                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                Mua hàng
+                            </button>
+                        }
+                        }
+                    </div>
+
+                   
+                </div>
+                <!-- n sản phẩm -->
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="~/MyScript/bootstrap-3.3.4/dist/css/bootstrap.css" />
+<div class="panel panel-footer">
+    <center>
+        <div style="padding:5px;" data-bind="foreach:listpage">
+            <span data-bind="text:PageNum,click:$parent.PageClick" style="cursor:pointer; padding:5px; font-size:15px;"></span>
+        </div>
+        <button data-bind="enable:preve,click:Prev" class="btn btn-default">
+            <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
+        </button>
+        <button data-bind="enable:nexte,click:Next" class="btn btn-default">
+            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+        </button>
+    </center>
+</div>
+<script src="~/MyScript/CatalogViewModel.js"></script>
+<script>
+    //var search = "@encode";
+    $(document).ready(function () {
+        var model = new CatalogViewModel();
+        var idSearch = '@Model.Id';
+        if (idSearch == 'ViewCatalog' || idSearch == '') { idSearch = 'VEVOU0FDSD0=1'; }
+        var tongSp = parseInt('@Model.tongSpTrongGio');
+        model.InitModel(idSearch, tongSp);
+        ko.applyBindings(model);
+    })
+</script>
+
+

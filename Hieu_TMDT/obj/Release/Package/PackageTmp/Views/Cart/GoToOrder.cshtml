@@ -1,0 +1,57 @@
+﻿@model Hieu_TMDT.Models.HoaDonVM
+
+@{
+    ViewBag.Title = "GoToOrder";
+    Layout = "~/Views/Shared/_Layout_temp.cshtml";
+}
+@{
+    if (Session["nguoidung"] == null || Session["cart"] == null)
+    {
+        <script>
+            window.location.href = "/Login/Login";
+        </script>
+    }
+    if (@TempData["thanhcong"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                alert(@TempData["thanhcong"]);
+            })
+        </script>
+    }
+
+}
+
+
+<h2>Đơn đặt hàng</h2>
+<div class="col-md-3"></div>
+<div class="col-md-6">
+    <div>
+        @using (Ajax.BeginForm("Order", "Cart", new AjaxOptions { }))
+        {
+            <label>Tên người nhận</label><br />
+            @Html.TextBoxFor(model => model.HO_TEN, htmlAttributes: new { @class = "form-control", @autofocus = "autofocus" })
+            @Html.ValidationMessageFor(model => model.HO_TEN, "", new { @class = "text-danger" })
+            <br />
+
+            <label>Điện thoại</label><br />
+            @Html.TextBoxFor(model => model.DIEN_THOAI, htmlAttributes: new { @class = "form-control", @autofocus = "autofocus" })
+            @Html.ValidationMessageFor(model => model.DIEN_THOAI, "", new { @class = "text-danger" })
+            <br />
+
+            <label>Địa chỉ</label><br />
+            @Html.TextBoxFor(model => model.DIA_CHI, htmlAttributes: new { @class = "form-control", @autofocus = "autofocus" })
+            @Html.ValidationMessageFor(model => model.DIA_CHI, "", new { @class = "text-danger" })
+            <br />
+
+            <label>Ghi chú</label><br />
+            @Html.TextAreaFor(model => model.GHI_CHU, htmlAttributes: new { @class = "form-control", @autofocus = "autofocus" })
+            <br />
+
+            <button type="submit" style="padding:10px; font-size:15px; margin-bottom:10px;" class="btn btn-info">Đặt hàng</button><br />
+            @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+        }
+    </div>
+
+</div>
+

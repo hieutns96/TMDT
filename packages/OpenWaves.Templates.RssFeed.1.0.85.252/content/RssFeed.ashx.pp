@@ -1,0 +1,1 @@
+﻿<%@ WebHandler Language="C#" CodeBehind="RssFeed.ashx.cs" Class="$rootnamespace$.RssFeed" %>

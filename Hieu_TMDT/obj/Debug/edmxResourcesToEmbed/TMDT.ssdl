@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="wthModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CT_HOA_DON">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MAHD" Type="bigint" Nullable="false" />
+    <Property Name="TENSACH" Type="nvarchar" MaxLength="50" />
+    <Property Name="SO_LUONG" Type="bigint" />
+    <Property Name="DON_GIA" Type="bigint" />
+  </EntityType>
+  <EntityType Name="DANH_MUC">
+    <Key>
+      <PropertyRef Name="MA_DM" />
+    </Key>
+    <Property Name="MA_DM" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TEN_DM" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="DISTRICT">
+    <Key>
+      <PropertyRef Name="DISTRICTID" />
+    </Key>
+    <Property Name="DISTRICTID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="PROVINCEID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="TYPE" Type="nvarchar" MaxLength="30" />
+    <Property Name="LOCATION" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="HINH_ANH">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HINH" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="MA_SACH" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HOA_DON">
+    <Key>
+      <PropertyRef Name="MA_HD" />
+    </Key>
+    <Property Name="MA_HD" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERNAME" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IDTT" Type="int" Nullable="false" />
+    <Property Name="DIA_CHI" Type="nvarchar" MaxLength="200" />
+    <Property Name="HO_TEN" Type="nvarchar" MaxLength="100" />
+    <Property Name="DIEN_THOAI" Type="bigint" />
+    <Property Name="NGAYDATHANG" Type="date" />
+    <Property Name="GHI_CHU" Type="nvarchar" MaxLength="100" />
+    <Property Name="TONG_TIEN" Type="bigint" />
+  </EntityType>
+  <EntityType Name="NGUOI_DUNG">
+    <Key>
+      <PropertyRef Name="USERNAME" />
+    </Key>
+    <Property Name="USERNAME" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PASSWORD" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IDQH" Type="bigint" Nullable="false" />
+    <Property Name="XACTHUC" Type="int" />
+    <Property Name="BARCODE" Type="nchar" MaxLength="10" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+    <Property Name="HO_TEN" Type="nvarchar(max)" />
+    <Property Name="DIA_CHI" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="NHA_XUAT_BAN">
+    <Key>
+      <PropertyRef Name="MA_NXB" />
+    </Key>
+    <Property Name="MA_NXB" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TEN_NXB" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="PROVINCE">
+    <Key>
+      <PropertyRef Name="PROVINCEID" />
+    </Key>
+    <Property Name="PROVINCEID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="TYPE" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="SACH">
+    <Key>
+      <PropertyRef Name="MA_SACH" />
+    </Key>
+    <Property Name="MA_SACH" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MA_DM" Type="bigint" Nullable="false" />
+    <Property Name="MA_NXB" Type="bigint" Nullable="false" />
+    <Property Name="TEN_SACH" Type="nvarchar" MaxLength="200" />
+    <Property Name="GIA_BIA" Type="bigint" />
+    <Property Name="GIA_BAN" Type="bigint" />
+    <Property Name="NGAY_NHAP" Type="date" />
+    <Property Name="SOLUOTMUA" Type="bigint" />
+    <Property Name="ANHBIA" Type="varchar" MaxLength="100" />
+    <Property Name="TINHTRANG" Type="int" />
+    <Property Name="LUOT_XEM" Type="bigint" />
+  </EntityType>
+  <EntityType Name="SLIDER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="HINH" Type="nvarchar" MaxLength="100" />
+    <Property Name="TITLE" Type="nvarchar" MaxLength="100" />
+    <Property Name="BODY" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="WARD">
+    <Key>
+      <PropertyRef Name="WARDID" />
+    </Key>
+    <Property Name="WARDID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="DISTRICTID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="TYPE" Type="nvarchar" MaxLength="30" />
+    <Property Name="LOCATION" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK_dbo_DISTRICT_dbo_PROVINCE_PROVINCEID">
+    <End Role="PROVINCE" Type="Self.PROVINCE" Multiplicity="1" />
+    <End Role="DISTRICT" Type="Self.DISTRICT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVINCE">
+        <PropertyRef Name="PROVINCEID" />
+      </Principal>
+      <Dependent Role="DISTRICT">
+        <PropertyRef Name="PROVINCEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_WARD_dbo_DISTRICT_DISTRICTID">
+    <End Role="DISTRICT" Type="Self.DISTRICT" Multiplicity="1" />
+    <End Role="WARD" Type="Self.WARD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DISTRICT">
+        <PropertyRef Name="DISTRICTID" />
+      </Principal>
+      <Dependent Role="WARD">
+        <PropertyRef Name="DISTRICTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="wthModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CT_HOA_DON" EntityType="Self.CT_HOA_DON" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DANH_MUC" EntityType="Self.DANH_MUC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DISTRICT" EntityType="Self.DISTRICT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HINH_ANH" EntityType="Self.HINH_ANH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HOA_DON" EntityType="Self.HOA_DON" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NGUOI_DUNG" EntityType="Self.NGUOI_DUNG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NHA_XUAT_BAN" EntityType="Self.NHA_XUAT_BAN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROVINCE" EntityType="Self.PROVINCE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SACH" EntityType="Self.SACH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SLIDER" EntityType="Self.SLIDER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WARD" EntityType="Self.WARD" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_DISTRICT_dbo_PROVINCE_PROVINCEID" Association="Self.FK_dbo_DISTRICT_dbo_PROVINCE_PROVINCEID">
+      <End Role="PROVINCE" EntitySet="PROVINCE" />
+      <End Role="DISTRICT" EntitySet="DISTRICT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_WARD_dbo_DISTRICT_DISTRICTID" Association="Self.FK_dbo_WARD_dbo_DISTRICT_DISTRICTID">
+      <End Role="DISTRICT" EntitySet="DISTRICT" />
+      <End Role="WARD" EntitySet="WARD" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

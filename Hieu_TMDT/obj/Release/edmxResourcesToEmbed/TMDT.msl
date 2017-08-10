@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="wthModelStoreContainer" CdmEntityContainer="wthEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="wthModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CT_HOA_DON">
+      <EntityTypeMapping TypeName="wthModel.CT_HOA_DON">
+        <MappingFragment StoreEntitySet="CT_HOA_DON">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MAHD" ColumnName="MAHD" />
+          <ScalarProperty Name="TENSACH" ColumnName="TENSACH" />
+          <ScalarProperty Name="SO_LUONG" ColumnName="SO_LUONG" />
+          <ScalarProperty Name="DON_GIA" ColumnName="DON_GIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DANH_MUC">
+      <EntityTypeMapping TypeName="wthModel.DANH_MUC">
+        <MappingFragment StoreEntitySet="DANH_MUC">
+          <ScalarProperty Name="MA_DM" ColumnName="MA_DM" />
+          <ScalarProperty Name="TEN_DM" ColumnName="TEN_DM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DISTRICTs">
+      <EntityTypeMapping TypeName="wthModel.DISTRICT">
+        <MappingFragment StoreEntitySet="DISTRICT">
+          <ScalarProperty Name="DISTRICTID" ColumnName="DISTRICTID" />
+          <ScalarProperty Name="PROVINCEID" ColumnName="PROVINCEID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HINH_ANH">
+      <EntityTypeMapping TypeName="wthModel.HINH_ANH">
+        <MappingFragment StoreEntitySet="HINH_ANH">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="HINH" ColumnName="HINH" />
+          <ScalarProperty Name="MA_SACH" ColumnName="MA_SACH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HOA_DON">
+      <EntityTypeMapping TypeName="wthModel.HOA_DON">
+        <MappingFragment StoreEntitySet="HOA_DON">
+          <ScalarProperty Name="MA_HD" ColumnName="MA_HD" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="IDTT" ColumnName="IDTT" />
+          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
+          <ScalarProperty Name="HO_TEN" ColumnName="HO_TEN" />
+          <ScalarProperty Name="DIEN_THOAI" ColumnName="DIEN_THOAI" />
+          <ScalarProperty Name="NGAYDATHANG" ColumnName="NGAYDATHANG" />
+          <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
+          <ScalarProperty Name="TONG_TIEN" ColumnName="TONG_TIEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NGUOI_DUNG">
+      <EntityTypeMapping TypeName="wthModel.NGUOI_DUNG">
+        <MappingFragment StoreEntitySet="NGUOI_DUNG">
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="IDQH" ColumnName="IDQH" />
+          <ScalarProperty Name="XACTHUC" ColumnName="XACTHUC" />
+          <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="HO_TEN" ColumnName="HO_TEN" />
+          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NHA_XUAT_BAN">
+      <EntityTypeMapping TypeName="wthModel.NHA_XUAT_BAN">
+        <MappingFragment StoreEntitySet="NHA_XUAT_BAN">
+          <ScalarProperty Name="MA_NXB" ColumnName="MA_NXB" />
+          <ScalarProperty Name="TEN_NXB" ColumnName="TEN_NXB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROVINCEs">
+      <EntityTypeMapping TypeName="wthModel.PROVINCE">
+        <MappingFragment StoreEntitySet="PROVINCE">
+          <ScalarProperty Name="PROVINCEID" ColumnName="PROVINCEID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SACHes">
+      <EntityTypeMapping TypeName="wthModel.SACH">
+        <MappingFragment StoreEntitySet="SACH">
+          <ScalarProperty Name="MA_SACH" ColumnName="MA_SACH" />
+          <ScalarProperty Name="MA_DM" ColumnName="MA_DM" />
+          <ScalarProperty Name="MA_NXB" ColumnName="MA_NXB" />
+          <ScalarProperty Name="TEN_SACH" ColumnName="TEN_SACH" />
+          <ScalarProperty Name="GIA_BIA" ColumnName="GIA_BIA" />
+          <ScalarProperty Name="GIA_BAN" ColumnName="GIA_BAN" />
+          <ScalarProperty Name="NGAY_NHAP" ColumnName="NGAY_NHAP" />
+          <ScalarProperty Name="SOLUOTMUA" ColumnName="SOLUOTMUA" />
+          <ScalarProperty Name="ANHBIA" ColumnName="ANHBIA" />
+          <ScalarProperty Name="TINHTRANG" ColumnName="TINHTRANG" />
+          <ScalarProperty Name="LUOT_XEM" ColumnName="LUOT_XEM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SLIDERs">
+      <EntityTypeMapping TypeName="wthModel.SLIDER">
+        <MappingFragment StoreEntitySet="SLIDER">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="HINH" ColumnName="HINH" />
+          <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+          <ScalarProperty Name="BODY" ColumnName="BODY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WARDs">
+      <EntityTypeMapping TypeName="wthModel.WARD">
+        <MappingFragment StoreEntitySet="WARD">
+          <ScalarProperty Name="WARDID" ColumnName="WARDID" />
+          <ScalarProperty Name="DISTRICTID" ColumnName="DISTRICTID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

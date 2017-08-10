@@ -1,0 +1,151 @@
+﻿@model Hieu_TMDT.Models.SignUpViewModel
+@{
+    Layout = "~/Views/Shared/_Layout_temp.cshtml";
+}
+@{
+    if (Session["nguoidung"] != null)
+    {
+        <script>
+            window.location.href = "/Home/Index";
+        </script>
+    }
+}
+<div class="col-md-3"></div>
+<div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Đăng kí</h3>
+        </div>
+        <div class="panel-body">
+            @using (Ajax.BeginForm("SignUp", "SignUp", FormMethod.Post, new AjaxOptions { }, new { @class = "form-horizontal", @onsubmit = "return ValidCaptcha();" }))
+            {
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label class="control-label" for="tendangnhap">Tên đăng nhập</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Username, htmlAttributes: new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Nhập Username" })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label class="control-label" for="email1">Email</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Nhập địa chỉ Email" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label class="control-label" for="email2">Nhập lại email</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.ReEmail, htmlAttributes: new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Nhập lại  Email" })
+                        @Html.ValidationMessageFor(model => model.ReEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label class="control-label" for="password1">Mật khẩu</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Password, htmlAttributes: new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Nhập mật khẩu", @type = "password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label class="control-label" for="password2">Nhập lại mật khẩu</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.RePassword, htmlAttributes: new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Nhập lại mật khẩu", @type = "password" })
+                        @Html.ValidationMessageFor(model => model.RePassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label class="control-label" for="password2">Họ tên</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.HO_TEN, htmlAttributes: new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Nhập họ tên" })
+                        @Html.ValidationMessageFor(model => model.HO_TEN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label class="control-label" for="password2">Địa chỉ</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.DIA_CHI, htmlAttributes: new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Nhập địa chỉ" })
+                        @Html.ValidationMessageFor(model => model.DIA_CHI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label class="control-label" for="captcha">Mã kiểm tra</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="captcha" id="captcha" style="background-image:url(/Image/1.jpg); font-size:xx-large; height:50px; text-align:center; border:none; font-weight:bold; font-family:Modern" disabled />
+                        <button type="button" class="btn btn-info btn-sm" id="btnrefresh" value="Refresh" onclick="DrawCaptcha();">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label class="control-label" for="txtcaptcha">Nhập mã kiểm tra</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="form-control" name="txtcaptcha" id="txtcaptcha" placeholder="Nhập mã kiểm tra" />
+                        <span id="capchaError" style="display:none; color:red;">Capcha nhập chưa đúng.</span>
+                    </div>
+                    <center><div><button type="submit" style="margin:20px; padding:10px; font-size:20px;">Đăng kí</button></div></center>
+                </div>
+                @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        DrawCaptcha();
+    });
+    //Created / Generates the captcha function
+    function DrawCaptcha() {
+        var alpha = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+        var i;
+        for (i = 0; i < 6; i++) {
+            var a = alpha[Math.floor(Math.random() * alpha.length)];
+            var b = alpha[Math.floor(Math.random() * alpha.length)];
+            var c = alpha[Math.floor(Math.random() * alpha.length)];
+            var d = alpha[Math.floor(Math.random() * alpha.length)];
+            var e = alpha[Math.floor(Math.random() * alpha.length)];
+            var f = alpha[Math.floor(Math.random() * alpha.length)];
+            var g = alpha[Math.floor(Math.random() * alpha.length)];
+        }
+        var code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e + ' ' + f + ' ' + g;
+        document.getElementById("captcha").value = code
+    }
+
+    // Validate the Entered input aganist the generated security code function
+    function ValidCaptcha() {
+        var str1 = removeSpaces(document.getElementById('captcha').value);
+        var str2 = removeSpaces(document.getElementById('txtcaptcha').value);
+        if (str1 === str2) {
+            $('#capchaError').hide();
+            return true;
+        }
+        else {
+            $('#capchaError').show();
+            return false;
+        }
+    }
+
+    // Remove the spaces from the entered and generated code
+    function removeSpaces(string) {
+        return string.split(' ').join('');
+    }
+</script>

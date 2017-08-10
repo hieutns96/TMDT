@@ -1,0 +1,182 @@
+﻿@using System.Xml.Linq;
+@using Hieu_TMDT.Models;
+@{
+    Layout = "~/Views/Shared/_Layout_temp.cshtml";
+}
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/597c17c25dfc8255d623f801/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
+<div class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>Anh Siêng FPT</h1>
+                    <h3>Chuyên Sữa Chữa Sự Cố Mạng</h3>
+                    <hr class="intro-divider">
+                    <ul class="list-inline intro-social-buttons">
+                        <li>
+                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/daohuusieng" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-google fa-fw"></i> <span class="network-name">GMAIL</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- Menu list -->
+<div class="content" style="padding-top: 50px;">
+    <div class="col-md-3">
+        <!-- Tin tức -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon glyphicon-info-sign" aria-hidden="true"></span> Tin tức giáo dục</h3>
+            </div>
+            <!--Body-->
+            <div class="list-group" style="height:200px; overflow:auto;">
+                @{
+                    string url = "http://vnexpress.net/rss/giao-duc.rss";
+                    try
+                    {
+                        XDocument xDoc = new XDocument();
+                        xDoc = XDocument.Load(url);
+                        var items = (from x in xDoc.Descendants("item")
+                                     select new
+                                     {
+                                         title = x.Element("title").Value,
+                                         link = x.Element("link").Value,
+                                         pubDate = x.Element("pubDate").Value,
+                                         description = x.Element("description").Value
+                                     });
+                        if (items != null)
+                        {
+                            foreach (var i in items)
+                            {
+                                <div class="list-group-item">
+                                    <h5 class="list-group-item-heading text-primary">@i.title</h5>
+                                    <p class="list-group-item-text text-muted" style="font-size:smaller;">
+                                        @Html.Raw(i.description)
+                                        @i.pubDate
+                                    </p>
+                                </div>
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        <p>Không thể kết nối đến trang @ex</p>
+                    }
+
+                }
+            </div>
+        </div>
+        <!-- Giỏ hàng-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Giỏ hàng</h3>
+            </div>
+            <div class="panel-body">
+                @{
+                    if (Session["nguoidung"] == null)
+                    { <text>Bạn chưa đăng nhập</text>}
+                    else
+                    {
+                        <text>
+                            Số lượng: <a class="text-danger" href="/Cart/ViewCart"><b data-bind="text:tongsoluong"></b></a> sản phẩm<br />
+                            Tổng tiền:<a class="text-danger" href="/Cart/ViewCart"><b data-bind="text:tongtien"></b></a> VNĐ<br />
+                            <a href="/Cart/ViewCart">Xem chi tiết</a>
+                        </text>
+                    }
+                }
+            </div>
+        </div>
+        <!-- Thống kê -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Thống kê</h3>
+            </div>
+            <div class="panel-body">
+                Đang online: @ApplicationInstance.Application["OnlineUsers"]<br />
+                Lượt truy cập: @ApplicationInstance.Application["TotalView"]<br />
+            </div>
+        </div>
+        <!-- Mạng xã hội -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Mạng xã hội</h3>
+            </div>
+            <div class="panel-body">
+                <div id="fb-root"></div>
+                <script>
+                    (function (d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.3";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+                </script>
+                <div class="fb-like" data-href="https://www.facebook.com/hcmuperconfess/" data-width="200" data-layout="standard" data-action="like" data-show-faces="true" data-share="true">
+
+                </div>
+            </div>
+        </div>
+        <!-- Dịch vụ-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Dịch vụ</h3>
+            </div>
+            <div class="panel-body">
+                <a href="/Home/Rss">
+                    <img src="~/Image/1433803520_rss.png" style="height:16px; width:16px;" />
+                </a> &nbsp;
+                <a href="/Service.asmx">Service</a>
+            </div>
+        </div>
+    </div>
+    <!-- Nội dung chính -->
+    <div class="col-md-9">
+        @RenderBody()
+        <hr />
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        @{
+            string tongtien ="0";
+            string tongsoluong="0";
+            if (Session["cart"] != null)
+            {
+                tongtien = ((GioHang)(Session["cart"])).TongTien().ToString();
+                tongsoluong=((GioHang)(Session["cart"])).TongSoluong().ToString();
+            }
+        }
+        var model = new HomeViewModel();
+        model.InitSell();
+        model.InitNew();
+        model.InitTT(@tongsoluong,@tongtien)
+        ko.applyBindings(model);
+    });
+</script>   
+<script src="~/MyScript/HomeViewModel.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5985b0f798ba1d45"></script>   

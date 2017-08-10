@@ -1,0 +1,272 @@
+﻿@using Hieu_TMDT.Models
+@{
+    Layout = "~/Views/Shared/_Layout_temp.cshtml";
+}
+@model Hieu_TMDT.Models.InfoView
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tìm kiếm nâng cao</title>
+
+    
+    <link href="~/MyScript/bootstrap-3.0.0/css/bootstrap.css" rel="stylesheet" />
+    <style>
+        #container {
+            width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #khungsearch {
+            padding: 10px;
+        }
+
+        .mystyle {
+            font-size: 15px;
+            padding: 10px;
+        }
+
+        .mytable tr, td {
+            padding: 10px;
+            width: 1200px;
+            border: 1px solid #dccccc;
+        }
+
+        .searchGia {
+            float: left;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    @{
+        wthEntities db = new wthEntities();
+        List<DANH_MUC> list = db.DANH_MUC.ToList();
+        List<NHA_XUAT_BAN> list1 = db.NHA_XUAT_BAN.ToList();
+        long min = (long)db.SACHes.Min(p => p.GIA_BAN);
+        long max = (long)db.SACHes.Max(p => p.GIA_BAN);
+
+    }
+
+    <div id="container">
+        <center><h2 style=" padding:10px;" class="panel panel-heading">Tìm kiếm nâng cao</h2></center>
+        <div id="khungsearch" class="responsive-utilities" style="background-color: antiquewhite;">
+            <table class="table-responsive">
+                <tr>
+                    <td><b class="mystyle">Tên  sách</b></td>
+
+                    <td>
+                        <center>
+                            <input class="form-control" type="text" id="tensach" data-bind="value:tensach, valueUpdate:'keyup'" />
+                        </center>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b class="mystyle">Danh mục</b></td>
+                    <td>
+                        <center>
+                            <select id="danhmuc" class="form-control" data-bind="value:danhmuc">
+                                <option value="-1">Tất cả</option>
+                                @{
+                                    foreach (DANH_MUC item in list)
+                                    {
+                                        <option value="@item.MA_DM">@item.TEN_DM</option>
+                                    }
+                                }
+                            </select>
+                        </center>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b class="mystyle">Nhà xuất bản</b></td>
+                    <td>
+                        <center>
+                            <select id="nhaxuatban" class="form-control" data-bind="value:nhaxuatban">
+                                <option value="-1">Tất cả</option>
+                                @{
+                                    foreach (NHA_XUAT_BAN item in list1)
+                                    {
+                                        <option value="@item.MA_NXB">@item.TEN_NXB</option>
+                                    }
+                                }
+                            </select>
+                        </center>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b class="mystyle">Giá bán</b></td>
+                    <td>
+                        <p class="searchGia">Từ: </p><input class="form-control" type="number" id="min" min="@min" max="@max" step="1000" data-bind="value:giamin,valueUpdate:'keyup',event:{change:OnChange}" style="width:150px;float:left;" /><p class="searchGia">VNĐ đến:</p>
+                        <input class="form-control" type="number" id="max" min="@min" max="@max" step="1000" data-bind="value:giamax,valueUpdate:'keyup',event:{change:OnChange}" style="width:150px; float:left;" /> <p class="searchGia">VNĐ</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button id="search" data-bind="click:Search()" class="btn btn-info" style="width:150px;">
+                            <span class="glyphicon glyphicon-search "></span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="background-color: antiquewhite; float:left;">
+            <div id="searchresult" data-bind="foreach:listbook">
+                <!-- n sản phẩm -->
+                <div style="margin:10px; float:left; padding-left:5px; padding-right:5px;border-radius:5px; border:1px solid #dccccc; background-color:white;">
+                    <div style="height:340px; text-align:center;">
+                        <a data-bind="click:$parent.GoToProduct" style="cursor:pointer;">
+                            <img data-bind="attr:{src:'/Image/Sach/'+AnhBia()}" style="width:180px; height:230px; margin-top:9px;" class="img-thumbnail" />
+                        </a>
+                        <h5 style="width:180px;" class="text-primary" data-bind="text:TenSach"></h5>
+                        <p>Giá bán:<span data-bind="text:GiaBan"></span></p>
+                    </div>
+                    <div style="margin-bottom:5px;">
+                        <button type="submit" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Xem chi tiết sản phẩm" data-bind="click:$parent.GoToProduct">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                            Xem
+                        </button>
+                        @{if (Session["nguoidung"] != null)
+                        {
+                            <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Mua sản phẩm" data-bind="click:$parent.AddCartClick">
+                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                Mua hàng
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Mua sản phẩm" data-bind="click:$parent.Sorry">
+                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                Mua hàng
+                            </button>
+                        }
+                        }
+                    </div>
+                </div>
+                <!-- n sản phẩm -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    var MyBook = function (manxb, masach, madanhmuc, tensach, giaban, giabia, tinhtrang, luotxem, anhbia, ngaynhap, soluotmua) {
+        var self = this;
+        self.MaNXB = ko.observable(manxb);
+        self.MaDanhMuc = ko.observable(madanhmuc);
+        self.MaSach = ko.observable(masach);
+        self.TenSach = ko.observable(tensach);
+        self.GiaBia = ko.observable(giabia);
+        self.GiaBan = ko.observable(giaban);
+        self.NgayNhap = ko.observable(ngaynhap);
+        self.SoLuotMua = ko.observable(soluotmua);
+        self.AnhBia = ko.observable(anhbia);
+        self.TinhTrang = ko.observable(tinhtrang);
+        self.LuotXem = ko.observable(luotxem);
+    }
+
+    var SearchViewModel = function (tongsp) {
+        var self = this;
+        self.danhmuc = ko.observable(-1);
+        self.nhaxuatban = ko.observable(-1);
+        self.tensach = ko.observable("");
+        self.giamin = ko.observable(@min);
+        self.giamax = ko.observable(@max);
+        self.tongsoluong = ko.observable(tongsp);
+
+        self.listbook = ko.observableArray([]);
+        self.Init = function () {
+            $.ajax({
+                url: "/SearchADV/Search",
+                method: "post",
+                data: { tensach: self.tensach(), madm: self.danhmuc(), nxb: self.nhaxuatban(), min: self.giamin(), max: self.giamax() },
+                //contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+
+                    var listItems = ko.utils.arrayMap(result, function (item) {
+                        return new MyBook(item.MaNXB, item.MaSach, item.MaDanhMuc, item.TenSach, item.GiaBan, item.GiaBia, item.TinhTrang, item.LuotXem, item.AnhBia, item.NgayNhap)
+                    });
+                    self.listbook.push.apply(self.listbook, listItems);
+                }
+            })
+
+        }
+        self.Search = function () {
+            if ($.isNumeric(self.giamax()) == false) { self.giamax(@max); }
+            if ($.isNumeric(self.giamin()) == false) { self.giamin(@min); }
+            if (self.tensach() == null) self.tensach("");
+            if (self.danhmuc() == null) self.danhmuc(-1);
+            if (self.nhaxuatban() == null) self.nhaxuatban(-1);
+            self.listbook.removeAll();
+            self.Init();
+        }
+        self.OnChange = function () {
+            if ($.isNumeric(self.giamax()) == false) { self.giamax(@max); }
+            if ($.isNumeric(self.giamin()) == false) { self.giamin(@min); }
+            self.giamin(document.getElementById("min").value);
+            self.giamax(document.getElementById("max").value);
+        }
+        self.GoToProduct = function (item) {
+            var link = "/Product/Product/";
+            //tăng số lượt xem lên 1
+            $.ajax({
+                url: '/Product/GoToProDuct',
+                method: "post",
+                data: { BookID: item.MaSach() },
+                success: function (result) {
+                    if (result == "") alert('Lỗi không thể kết nối đến server.');
+                    else {
+                        window.location.href = link + result;
+                    }
+                },
+                error: function (e) {
+                    alert('Lỗi không thể kết nối đến server.');
+                }
+            });
+        }
+
+        self.Sorry = function (MyBook) {
+            //alert("Xin lỗi bạn chưa đăng nhập nên không thể mua");
+            $.notify("Xin lỗi bạn chưa đăng nhập nên không thể mua!", "warn", { position: "top center" });
+        }
+        self.AddCartClick = function (MyBook) {
+            if (MyBook.TinhTrang() == 0) {
+                jsondata = ko.toJSON(MyBook);
+                //alert(jsondata);
+                $.ajax({
+                    url: '/Cart/AddBook',
+                    method: 'post',
+                    contentType: 'application/json; charset=utf-8',
+                    data: jsondata,
+                    success: function (result) {
+                        $.notify("Đã thêm vào giỏ hàng!", "success", "top");
+                        self.tongsoluong(self.tongsoluong() + 1);
+                        // alert(result);
+                        var str = result;
+                        var res = str.split(" ");
+                        //self.tongsoluong(res[0]);
+                        //self.tongtien(res[1]);
+                    },
+                    error: function (e) {
+                        alert('Lỗi không thể kết nối đến server.');
+                    }
+                });
+            }
+            else { alert("Sách này đã ngưng bán!"); }
+        }
+    }
+
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        var tongSp = parseInt('@Model.tongSpTrongGio');
+        var model = new SearchViewModel(tongSp);
+        model.Init();
+        ko.applyBindings(model);
+    })
+</script>
+

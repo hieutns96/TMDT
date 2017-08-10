@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Ioc.Modules</id>
+    <version>1.1.5</version>
+    <title>Ioc.Modules</title>
+    <authors>Martin Halliday</authors>
+    <owners>Martin Halliday</owners>
+    <licenseUrl>http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</licenseUrl>
+    <projectUrl>https://github.com/Bikeman868/Ioc.Modules</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A modular way of configuring IOC dependencies that is independent of the container</description>
+    <summary>Provides a mechanism for library authors to inform the hosting application
+      about its IoC requirements. Applications can also use this internally to
+      make their IoC configuration more modular.</summary>
+    <releaseNotes>The entry assembly for the application takes proirity over referenced libraries when the same interface is registered multiple times</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>IOC modular package library</tags>
+  </metadata>
+</package>

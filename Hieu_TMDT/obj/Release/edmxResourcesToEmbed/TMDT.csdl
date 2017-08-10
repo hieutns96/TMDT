@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="wthModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CT_HOA_DON">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MAHD" Type="Int64" Nullable="false" />
+    <Property Name="TENSACH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SO_LUONG" Type="Int64" />
+    <Property Name="DON_GIA" Type="Int64" />
+  </EntityType>
+  <EntityType Name="DANH_MUC">
+    <Key>
+      <PropertyRef Name="MA_DM" />
+    </Key>
+    <Property Name="MA_DM" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TEN_DM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DISTRICT">
+    <Key>
+      <PropertyRef Name="DISTRICTID" />
+    </Key>
+    <Property Name="DISTRICTID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PROVINCEID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TYPE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="LOCATION" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PROVINCE" Relationship="Self.FK_dbo_DISTRICT_dbo_PROVINCE_PROVINCEID" FromRole="DISTRICT" ToRole="PROVINCE" />
+    <NavigationProperty Name="WARDs" Relationship="Self.FK_dbo_WARD_dbo_DISTRICT_DISTRICTID" FromRole="DISTRICT" ToRole="WARD" />
+  </EntityType>
+  <EntityType Name="HINH_ANH">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HINH" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MA_SACH" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HOA_DON">
+    <Key>
+      <PropertyRef Name="MA_HD" />
+    </Key>
+    <Property Name="MA_HD" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IDTT" Type="Int32" Nullable="false" />
+    <Property Name="DIA_CHI" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="HO_TEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DIEN_THOAI" Type="Int64" />
+    <Property Name="NGAYDATHANG" Type="DateTime" Precision="0" />
+    <Property Name="GHI_CHU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TONG_TIEN" Type="Int64" />
+  </EntityType>
+  <EntityType Name="NGUOI_DUNG">
+    <Key>
+      <PropertyRef Name="USERNAME" />
+    </Key>
+    <Property Name="USERNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IDQH" Type="Int64" Nullable="false" />
+    <Property Name="XACTHUC" Type="Int32" />
+    <Property Name="BARCODE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HO_TEN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DIA_CHI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="NHA_XUAT_BAN">
+    <Key>
+      <PropertyRef Name="MA_NXB" />
+    </Key>
+    <Property Name="MA_NXB" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TEN_NXB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PROVINCE">
+    <Key>
+      <PropertyRef Name="PROVINCEID" />
+    </Key>
+    <Property Name="PROVINCEID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TYPE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DISTRICTs" Relationship="Self.FK_dbo_DISTRICT_dbo_PROVINCE_PROVINCEID" FromRole="PROVINCE" ToRole="DISTRICT" />
+  </EntityType>
+  <EntityType Name="SACH">
+    <Key>
+      <PropertyRef Name="MA_SACH" />
+    </Key>
+    <Property Name="MA_SACH" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MA_DM" Type="Int64" Nullable="false" />
+    <Property Name="MA_NXB" Type="Int64" Nullable="false" />
+    <Property Name="TEN_SACH" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GIA_BIA" Type="Int64" />
+    <Property Name="GIA_BAN" Type="Int64" />
+    <Property Name="NGAY_NHAP" Type="DateTime" Precision="0" />
+    <Property Name="SOLUOTMUA" Type="Int64" />
+    <Property Name="ANHBIA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TINHTRANG" Type="Int32" />
+    <Property Name="LUOT_XEM" Type="Int64" />
+  </EntityType>
+  <EntityType Name="SLIDER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="HINH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TITLE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BODY" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="WARD">
+    <Key>
+      <PropertyRef Name="WARDID" />
+    </Key>
+    <Property Name="WARDID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DISTRICTID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TYPE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="LOCATION" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DISTRICT" Relationship="Self.FK_dbo_WARD_dbo_DISTRICT_DISTRICTID" FromRole="WARD" ToRole="DISTRICT" />
+  </EntityType>
+  <Association Name="FK_dbo_DISTRICT_dbo_PROVINCE_PROVINCEID">
+    <End Role="PROVINCE" Type="Self.PROVINCE" Multiplicity="1" />
+    <End Role="DISTRICT" Type="Self.DISTRICT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVINCE">
+        <PropertyRef Name="PROVINCEID" />
+      </Principal>
+      <Dependent Role="DISTRICT">
+        <PropertyRef Name="PROVINCEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_WARD_dbo_DISTRICT_DISTRICTID">
+    <End Role="DISTRICT" Type="Self.DISTRICT" Multiplicity="1" />
+    <End Role="WARD" Type="Self.WARD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DISTRICT">
+        <PropertyRef Name="DISTRICTID" />
+      </Principal>
+      <Dependent Role="WARD">
+        <PropertyRef Name="DISTRICTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="wthEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="CT_HOA_DON" EntityType="Self.CT_HOA_DON" />
+    <EntitySet Name="DANH_MUC" EntityType="Self.DANH_MUC" />
+    <EntitySet Name="DISTRICTs" EntityType="Self.DISTRICT" />
+    <EntitySet Name="HINH_ANH" EntityType="Self.HINH_ANH" />
+    <EntitySet Name="HOA_DON" EntityType="Self.HOA_DON" />
+    <EntitySet Name="NGUOI_DUNG" EntityType="Self.NGUOI_DUNG" />
+    <EntitySet Name="NHA_XUAT_BAN" EntityType="Self.NHA_XUAT_BAN" />
+    <EntitySet Name="PROVINCEs" EntityType="Self.PROVINCE" />
+    <EntitySet Name="SACHes" EntityType="Self.SACH" />
+    <EntitySet Name="SLIDERs" EntityType="Self.SLIDER" />
+    <EntitySet Name="WARDs" EntityType="Self.WARD" />
+    <AssociationSet Name="FK_dbo_DISTRICT_dbo_PROVINCE_PROVINCEID" Association="Self.FK_dbo_DISTRICT_dbo_PROVINCE_PROVINCEID">
+      <End Role="PROVINCE" EntitySet="PROVINCEs" />
+      <End Role="DISTRICT" EntitySet="DISTRICTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_WARD_dbo_DISTRICT_DISTRICTID" Association="Self.FK_dbo_WARD_dbo_DISTRICT_DISTRICTID">
+      <End Role="DISTRICT" EntitySet="DISTRICTs" />
+      <End Role="WARD" EntitySet="WARDs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

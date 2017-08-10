@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0a42ce32a8c745fca6882ec5e8921724" Name="Diagram1">
+        <EntityTypeShape EntityType="wthModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wthModel.CT_HOA_DON" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wthModel.DANH_MUC" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wthModel.DISTRICT" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="wthModel.HINH_ANH" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wthModel.HOA_DON" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wthModel.NGUOI_DUNG" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wthModel.NHA_XUAT_BAN" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wthModel.PROVINCE" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="wthModel.SACH" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wthModel.SLIDER" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wthModel.WARD" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="wthModel.FK_dbo_DISTRICT_dbo_PROVINCE_PROVINCEID" ManuallyRouted="false" />
+        <AssociationConnector Association="wthModel.FK_dbo_WARD_dbo_DISTRICT_DISTRICTID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

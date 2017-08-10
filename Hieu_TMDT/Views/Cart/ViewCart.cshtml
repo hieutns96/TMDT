@@ -1,0 +1,120 @@
+﻿@using System.Configuration
+@{
+    Layout = "~/Views/Shared/_Layout_temp.cshtml";
+}
+@using Hieu_TMDT.Models;
+@{
+    if (Session["nguoidung"] == null)
+    {
+        <script>
+            window.location.href = "/Login/Login";
+        </script>}
+}
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Giỏ hàng</h3>
+        </div>
+        <div class="panel-body">
+            @{if (Session["cart"] != null)
+            {
+            <!-- Chi tiết giỏ hàng -->
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <!-- Code here -->
+                    <tbody data-bind="foreach:listcart">
+                        <!-- n sản phẩm -->
+                        <tr>
+                            <td><span data-bind="text:MaSach"></span></td>
+                            <td><span data-bind="text:TenSach"></span></td>
+                            <td><span data-bind="text:GiaBan"></span></td> <!-- Đơn giá là giá bán-->
+                            <td><input style="width:100px;" type="number" class="form-control" value="1" min="1" max="50" data-bind="value:SoLuongTrongGio,valueUpdate:'keyup',event: {change: $parent.onChange}"></td>
+                            <td><span data-bind="text:GiaBan()*SoLuongTrongGio()"></span></td>
+                            <td>
+                                <button class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Xoá sản phẩm" data-bind="click:$parent.RemoveItem">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+
+
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>Tổng</b></td>
+                        <td><span class="text-success"><b data-bind="text:tongsoluong"></b> </span>sản phẩm</td>
+                        <td><span class="text-danger"><b data-bind="text:tongtien"></b> </span>VNĐ</td>
+
+                        <td></td>
+
+                    </tr>
+
+                </table>
+                
+              
+                <div class="col-md-6"></div>
+                
+                <div class="col-md-6">                  
+
+                    <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="right" title="Cập nhật giỏ hàng" data-bind="click:UpdateCart"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Cập nhật</button> &nbsp;
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Đặt hàng" data-bind="click:Order"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Đặt hàng</button> &nbsp;
+                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Huỷ toàn bộ giỏ hàng" data-bind="click:RemoveCart"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Huỷ giỏ hàng
+                    </button>                  
+                    <form action="@ConfigurationManager.AppSettings["urlSubmitPayment"]" method="post">
+                       
+                        <!-- Identify your business so that you can collect the payments. -->
+                        <input type="hidden" name="business" value="@ConfigurationManager.AppSettings["accountBusiness"]">
+
+                        <!-- Specify a Buy Now button. -->
+                        <input type="hidden" name="cmd" value="_xclick">                       
+                        <!-- Specify details about the item that buyers will purchase. -->
+                        <input type="hidden" name="item_name" value="Checkout">
+                        <input type="hidden" name="amount" data-bind="value: tongtien()/20000">
+                        <input type="hidden" name="currency_code" value="USD">
+
+
+                        <!-- Display the payment button. -->
+                        <input type="image" name="submit" border="0"
+                               src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_buynow_107x26.png"
+                               alt="Buy Now">
+                        <img alt="" border="0" width="1" height="1"
+                             src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
+
+                    </form>
+                </div>
+                
+            }
+            else
+            { <text>Không có hàng trong giỏ</text>}}
+        </div>
+    </div>
+</div>
+@{
+    if (Session["cart"] != null)
+    {
+        <script src="~/MyScript/CartView.js"></script>
+        <script>
+            $(document).ready(function () {
+                var model = new CartViewModel();
+                model.InitCart();
+                ko.validation.init({
+                    decorateElement: true,
+                    errorMessageClass: 'text-danger',
+                    insertMessages: true,
+                });
+                ko.applyBindings(model);
+            })
+        </script>}
+}

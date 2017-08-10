@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+@{
+    @*if(Session["nguoidung"]==null)
+        {
+            <script>
+                window.location.href = "/Login/Login";
+            </script>
+        }*@
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Thank You</title>
+</head>
+<body>
+    <center>
+        <div>
+
+            <span style="font-size:100px; font-family:Arial;">THANK YOU</span><br />
+            <span style="font-size:30px; font-family:Arial;">Cám ơn bạn đã tin tưởng và đặt hàng Shop</span>
+            <br />
+            <a href="/Catalog/ViewCatalog" style="font-size:30px; padding:20px;margin-top:30px;">Trở lại shop</a><br />
+            <img src="~/Image/easter-bunny-straws-template-color.png" height="200" width="100" />
+        </div>
+    </center>
+</body>
+</html>

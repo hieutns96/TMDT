@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Hieu_TMDT.SACH>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MA_DM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MA_NXB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TEN_SACH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GIA_BIA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GIA_BAN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NGAY_NHAP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SOLUOTMUA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ANHBIA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TINHTRANG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LUOT_XEM)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MA_DM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MA_NXB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TEN_SACH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GIA_BIA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GIA_BAN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NGAY_NHAP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SOLUOTMUA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ANHBIA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TINHTRANG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LUOT_XEM)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MA_SACH }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MA_SACH }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MA_SACH })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

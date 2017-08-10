@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Trang Chủ";
+}
+
+
+<link href="~/Css/templatemo_style_item.css" rel="stylesheet" />
+<link href="~/Css/slimbox2.css" rel="stylesheet" />
+
+
+<div class="panel panel-default" style="padding:20px;">
+    <div class="row">
+        <div class="col-md-4">
+            <h2 class="text-primary">Sản phẩm</h2>
+            <p>
+                Sách giáo khoa và sách tham khảo<br /> &nbsp;
+            </p>
+            <p><a class="btn btn-default" href="/Catalog/ViewCatalog">Xem thêm &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2 class="text-primary">Giới thiệu</h2>
+            <p>Thông tin cửa hàng<br /> &nbsp;</p>
+            <p><a class="btn btn-default" href="~/Home/About">Xem thêm &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2 class="text-primary">Liên hệ</h2>
+            <p>Liên hệ để biết thông tin liên lạc chi tiết <br /> &nbsp;</p>
+            <p><a class="btn btn-default" href="~/Home/Contact">Xem thêm &raquo;</a></p>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" id="home">
+    <div class="panel-heading">
+        <center> <h3 class="panel-title">Sản phẩm</h3></center>
+    </div>
+    <div class="panel-body mybackground-color">
+        <!-- Sản phẩm -->
+        <div role="tabpanel">
+            <!-- Nav tabs -->
+            <!-- Example split danger button -->
+
+
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#san-pham-moi" aria-controls="san-pham-moi" role="tab" data-toggle="tab">Danh sách sản phẩm mới</a></li>
+                <li role="presentation"><a href="#san-pham-ban-chay" aria-controls="san-pham-ban-chay" role="tab" data-toggle="tab">Danh sách sản phẩm bán chạy</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- Sản phẩm mới -->
+                <div role="tabpanel" class="tab-pane active" id="san-pham-moi" data-bind="foreach:listnew">
+                    <!-- n sản phẩm -->
+                    <div class="thumbnail col-md-3" style="margin:28px; width:200px;">
+                        <div style="height:340px; text-align:center;">
+                            <img data-bind="attr:{src:'/Image/Sach/'+AnhBia()}" style="width:180px; height:230px; margin-top:9px;" class="img-thumbnail" />
+                            <h5 style="width:180px;" class="text-primary" data-bind="text:TenSach"></h5>
+                            <p>Giá bán:<span data-bind="text:GiaBan"></span></p>
+                        </div>
+                        <div style="margin-bottom:5px;">
+                            <button type="submit" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Xem chi tiết sản phẩm" data-bind="click:$parent.GoToProduct">
+                                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                Xem
+                            </button>
+
+                            @{if (Session["nguoidung"] != null)
+                            {
+                                <button type="button" class="btn btn-twitter" data-toggle="tooltip" data-placement="bottom" title="Mua sản phẩm" data-bind="click:$parent.AddCartClick">
+                                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                    Mua hàng
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-twitter"  data-toggle="tooltip" data-placement="bottom" title="Mua sản phẩm" data-bind="click:$parent.Sorry">
+                                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                    Mua hàng
+                                </button>
+                            }
+                            }
+                        </div>
+                    </div>
+                    <!-- n sản phẩm -->
+                </div>
+                <!-- Sản phẩm bán chạy -->
+                <div role="tabpanel" class="tab-pane" id="san-pham-ban-chay" data-bind="foreach:listsell">
+
+                    <div @*class="row"*@>
+                        <!-- n sản phẩm -->
+                        <div class="thumbnail col-md-3" style="margin:28px; width:200px;">
+                            <div style="height:340px; text-align:center;">
+                                <img data-bind="attr:{src:'/Image/Sach/'+AnhBia()}" style="width:180px; height:230px; margin-top:9px;" class="img-thumbnail" />
+                                <h5 style="width:180px;" class="text-primary" data-bind="text:TenSach"></h5>
+                                <p>Giá bán:<span data-bind="text:GiaBan"></span></p>
+                            </div>
+                            <div style="margin-bottom:5px;">
+                                <button type="button" class="btn btn-twitter" data-toggle="tooltip" data-placement="bottom" title="Xem chi tiết sản phẩm" data-bind="click:$parent.GoToProduct">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                    Xem
+                                </button>
+                                @{
+                                    if (Session["nguoidung"] != null)
+                                    {
+                                        <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Mua sản phẩm" data-bind="click:$parent.AddCartClick">
+                                            <span class=" glyphicon glyphicon-shopping-cart" aria-hidden="true">
+                                            </span>
+                                            Mua hàng
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Mua sản phẩm" data-bind="click:$parent.Sorry">
+                                            <span class=" glyphicon glyphicon-shopping-cart" aria-hidden="true">
+                                            </span>
+                                            Mua hàng
+                                        </button>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <!-- n sản phẩm -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/MyScript/HomeViewModel.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".dropdown-toggle").dropdown();
+    });
+</script>
