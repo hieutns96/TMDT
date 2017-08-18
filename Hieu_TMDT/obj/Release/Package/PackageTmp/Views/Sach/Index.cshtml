@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Hieu_TMDT.SACH>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/Home/AdminPage">Home</a>
+        </li>
+        <li class="active">Quản lí Sách</li>
+    </ul>
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+            </span>
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+<h2>Danh Sách Sách</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Mã Danh Mục
+        </th>
+        <th>
+            MÃ NXB
+        </th>
+        <th>
+            Tên Sách
+        </th>
+        <th>
+            Gía Bìa
+        </th>
+        <th>
+            Gía Bán
+        </th>
+        <th>
+            Ngày Nhập
+        </th>
+        <th>
+            Số Lượt Mua
+        </th>
+        <th>
+            Ảnh Bìa
+        </th>
+        <th>
+            Tình Trạng
+        </th>
+        <th>
+            Lượt Xem
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MA_DM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MA_NXB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TEN_SACH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GIA_BIA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GIA_BAN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NGAY_NHAP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SOLUOTMUA)
+            </td>
+            <td>
+
+                <img src="~/Image/Sach/@item.ANHBIA" class="item-book" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TINHTRANG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LUOT_XEM)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MA_SACH }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MA_SACH }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MA_SACH })
+            </td>
+        </tr>
+    }
+
+</table>
+

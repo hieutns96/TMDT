@@ -260,6 +260,6 @@ C:\Users\DELL\Desktop\Hieu_TMDT\Hieu_TMDT\bin\System.Web.WebPages.Razor.xml
 C:\Users\DELL\Desktop\Hieu_TMDT\Hieu_TMDT\bin\Antlr3.Runtime.pdb
 C:\Users\DELL\Desktop\Hieu_TMDT\Hieu_TMDT\bin\ja\Microsoft.Owin.Security.Facebook.resources.dll
 C:\Users\DELL\Desktop\Hieu_TMDT\Hieu_TMDT\bin\ja\Microsoft.Owin.Security.Google.resources.dll
-C:\Users\DELL\Desktop\Hieu_TMDT\Hieu_TMDT\obj\Debug\Hieu_TMDT.csprojResolveAssemblyReference.cache
 C:\Users\DELL\Desktop\Hieu_TMDT\Hieu_TMDT\obj\Debug\Hieu_TMDT.dll
 C:\Users\DELL\Desktop\Hieu_TMDT\Hieu_TMDT\obj\Debug\Hieu_TMDT.pdb
+C:\Users\DELL\Desktop\Hieu_TMDT\Hieu_TMDT\obj\Debug\Hieu_TMDT.csprojResolveAssemblyReference.cache

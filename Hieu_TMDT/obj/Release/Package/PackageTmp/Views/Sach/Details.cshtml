@@ -1,0 +1,99 @@
+﻿@model Hieu_TMDT.SACH
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MyAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SACH</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MA_DM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MA_DM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MA_NXB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MA_NXB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TEN_SACH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TEN_SACH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GIA_BIA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GIA_BIA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GIA_BAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GIA_BAN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAY_NHAP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAY_NHAP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SOLUOTMUA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SOLUOTMUA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ANHBIA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ANHBIA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TINHTRANG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TINHTRANG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LUOT_XEM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LUOT_XEM)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MA_SACH }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

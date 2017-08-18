@@ -1,8 +1,17 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout_temp.cshtml";
+    Layout = "~/Views/Shared/_Layout_With_Car.cshtml";
 }
 @using Hieu_TMDT.Models
 @model Hieu_TMDT.Models.InfoView
+<style>
+    .mycontainer {
+        margin-left: 10%;
+        margin-right: 10%;
+
+    }
+</style>
+
+
 <!-- Sách -->
 <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"> </script>
 
@@ -14,84 +23,85 @@
         FB.Connect.logout();
     }
 </script>
- 
-<div class="panel panel-default">
-    @{
-        NhaSachRepository ns = new NhaSachRepository();
-        string encode = (Path.GetFileName(Request.Url.AbsolutePath));
+<div class="mycontainer">
 
-    }
-    <div class="panel-heading">
-        <h3 class="panel-title">Chi tiết sản phẩm</h3>
-    </div>
-    <div class="panel-body">
-        <div class="row">
-            <!-- Ảnh bìa -->
-            <div class="col-md-4">
-                <img data-bind="attr:{src:'/Image/Sach/'+cur_anhbia()}" style="width:350px; height:500px;" class="img-thumbnail" />
-            </div>
-            <!-- Thông tin sách-->
-            <div class="col-md-8">
-                <h2 class="text-primary" data-bind="text:book().TenSach"></h2>
-                <a>Lượt xem: <span class="badge"><span data-bind="text:book().LuotXem"></span></span></a>
-                <a>Lượt mua: <span class="badge"><span data-bind="text:book().SoLuotMua"></span></span></a>
-                <p>Mã sản phẩm: <span data-bind="text:book().MaSach"></span></p>
-                <p>Giá bìa: <span data-bind="text:book().GiaBia"></span> VNĐ</p>
-                <p>Giá tại Million's Store: <a class="text-success" style="font-size:large;"><b data-bind="text:book().GiaBan"></b></a> VNĐ</p>
-                <p>Tình trạng: <span data-bind="text:book().TenTinhTrang"></span></p>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Thông tin</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                Danh mục: <span data-bind="text:book().TenDanhMuc"></span> - NXB <span data-bind="text:book().TenNXB"></span>
-                                <br />
-                            </td>
-                        </tr>
+    <div class="panel panel-default">
+        @{
+            NhaSachRepository ns = new NhaSachRepository();
+            string encode = (Path.GetFileName(Request.Url.AbsolutePath));
 
-                    </tbody>
-                </table>
-                <!-- Go to www.addthis.com/dashboard to customize your tools --> <div class="addthis_inline_share_toolbox_s7pw"></div>
+        }
+        <div class="panel-heading">
+            <h3 class="panel-title">Chi tiết sản phẩm</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <!-- Ảnh bìa -->
+                <div class="col-md-4">
+                    <img data-bind="attr:{src:'/Image/Sach/'+cur_anhbia()}" style="width:350px; height:500px;" class="img-thumbnail" />
+                </div>
+                <!-- Thông tin sách-->
+                <div class="col-md-8">
+                    <h2 class="text-primary" data-bind="text:book().TenSach"></h2>
+                    <a>Lượt xem: <span class="badge"><span data-bind="text:book().LuotXem"></span></span></a>
+                    <a>Lượt mua: <span class="badge"><span data-bind="text:book().SoLuotMua"></span></span></a>
+                    <p>Mã sản phẩm: <span data-bind="text:book().MaSach"></span></p>
+                    <p>Giá bìa: <span data-bind="text:book().GiaBia"></span> VNĐ</p>
+                    <p>Giá tại Million's Store: <a class="text-success" style="font-size:large;"><b data-bind="text:book().GiaBan"></b></a> VNĐ</p>
+                    <p>Tình trạng: <span data-bind="text:book().TenTinhTrang"></span></p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Thông tin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Danh mục: <span data-bind="text:book().TenDanhMuc"></span> - NXB <span data-bind="text:book().TenNXB"></span>
+                                    <br />
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <!-- Go to www.addthis.com/dashboard to customize your tools --> <div class="addthis_inline_share_toolbox_s7pw"></div>
+                </div>
+                <!-- Mua hàng -->
+                <div class="col-md-1"></div>
+                @{
+                    if (Session["nguoidung"] != null)
+                    {
+                        <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Thêm vào giỏ hàng" data-bind="click:AddCart">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Mua hàng
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Thêm vào giỏ hàng" data-bind="click:Sorry">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Mua hàng
+                        </button>
+                    }
+                }
             </div>
-            <!-- Mua hàng -->
-            <div class="col-md-1"></div>
-            @{
-                if (Session["nguoidung"] != null)
-                {
-                    <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Thêm vào giỏ hàng" data-bind="click:AddCart">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Mua hàng
-                    </button>
-                }
-                else
-                {
-                    <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Thêm vào giỏ hàng" data-bind="click:Sorry">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Mua hàng
-                    </button>
-                }
-            }
         </div>
     </div>
-</div>
-<!-- Hình ảnh -->
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Một số hình ảnh của sản phẩm</h3>
+    <!-- Hình ảnh -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Một số hình ảnh của sản phẩm</h3>
+        </div>
+        <!--Load hình ảnh-->
+        <div class="panel-body" data-bind="foreach:listhinh">
+            <img data-bind="click:$parent.ChangeImage,attr:{src:'/Image/Sach/'+TenHinh()}" style="width:180px; height:300px; margin:9px; cursor:pointer;" class="img-thumbnail" />
+        </div>
+
+
     </div>
-    <!--Load hình ảnh-->
-    <div class="panel-body" data-bind="foreach:listhinh">
-        <img data-bind="click:$parent.ChangeImage,attr:{src:'/Image/Sach/'+TenHinh()}" style="width:180px; height:300px; margin:9px; cursor:pointer;" class="img-thumbnail" />
-    </div>
+    <!--Binh luan-->
+    <div class="fb-comments" data-href="http://localhost:4317/Product/Product/" data-width="700" data-numposts="5"></div>
 
-
-</div>
-<!--Binh luan-->
-<div class="fb-comments" data-href="http://localhost:4317/Product/Product/" data-width="700" data-numposts="5"></div>
-
-<fb:login-button length="long" önlogin="window.location='abc.aspx'"></fb:login-button>
+    <fb:login-button length="long" önlogin="window.location='abc.aspx'"></fb:login-button>
     <script>
         $(document).ready(function () {
             var tongSp = parseInt('@Model.tongSpTrongGio');
@@ -113,3 +123,5 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 
+
+</div>

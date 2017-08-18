@@ -16,7 +16,7 @@ namespace Hieu_TMDT.Models
             try
             {
                 string to = ToAddress;
-                string from = "ginta15979@gmail.com";
+                string from = "doctorstrange1206@gmail.com";
 
                 string subject = Subject;
                 string body = Body;
@@ -25,7 +25,7 @@ namespace Hieu_TMDT.Models
                 {
                     client.EnableSsl = true;
                     client.UseDefaultCredentials = false;
-                    client.Credentials = new NetworkCredential("ginta15979@gmail.com", "songhieu1206");
+                    client.Credentials = new NetworkCredential("doctorstrange1206@gmail.com", "songhieu1206");
                     client.Host = "smtp.gmail.com";
                     client.Port = 587;
                     client.DeliveryMethod = SmtpDeliveryMethod.Network;

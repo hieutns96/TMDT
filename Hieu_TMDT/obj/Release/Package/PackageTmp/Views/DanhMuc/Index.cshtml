@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Hieu_TMDT.DANH_MUC>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/Home/AdminPage">Home</a>
+        </li>
+        <li class="active">Quản lí Danh Mục</li>
+    </ul>
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+            </span>
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+<h2>Danh Sách Danh Mục</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TEN_DM)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TEN_DM)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MA_DM }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MA_DM }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MA_DM })
+            </td>
+        </tr>
+    }
+
+</table>
+

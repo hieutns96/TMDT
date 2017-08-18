@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Hieu_TMDT.HOA_DON>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyAdmin.cshtml";
+}
+
+<h2>Index</h2>
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/Home/AdminPage">Home</a>
+        </li>
+        <li class="active">Quản lí Hóa Đơn</li>
+    </ul>
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+            </span>
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+<h2>Danh Sách Hóa Đơn</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.USERNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDTT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIA_CHI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HO_TEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIEN_THOAI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NGAYDATHANG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GHI_CHU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TONG_TIEN)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.USERNAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDTT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DIA_CHI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HO_TEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DIEN_THOAI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NGAYDATHANG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GHI_CHU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TONG_TIEN)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MA_HD }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MA_HD }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MA_HD })
+            </td>
+        </tr>
+    }
+
+</table>

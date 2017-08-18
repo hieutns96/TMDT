@@ -1,0 +1,482 @@
+﻿
+@using Hieu_TMDT.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mèo Mun Nắng</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/ChatStyle.css" rel="stylesheet" />
+    <link href="~/Content/sitemap.css" rel="stylesheet" />
+    <link href="~/Content/landing-page.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/frameWorkJs")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/chatJs")
+
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5985b0f798ba1d45"></script>
+
+    @using Hieu_TMDT.Models
+</head>
+<body>
+    <!-- Navigation -->
+    <!-- Menu bar -->
+    <div class="navbar navbar-default navbar-fixed-top topnav" style="margin-bottom: 55px;" id="layoutmodel">
+        <div class="container topnav">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Mèo Mun Nắng ", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                    <!-- Xem s?n ph?m theo nhóm -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sản phẩm<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" id="danhmuc"></ul>
+                    </li>
+                    <!-- Xem s?n ph?m theo nhà xu?t b?n-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Nhà xuất bản<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" id="nhaxuatban"></ul>
+                    </li>
+                    <li>@Html.ActionLink("Giới thiệu", "About", "Home")</li>
+                    <li>@Html.ActionLink("Liên hệ", "Contact", "Home")</li>
+
+                </ul>
+                <!-- Search -->
+                <input type="text" id="txtsearch" class="form-control" placeholder="Tìm kiếm theo tên" style="float:left; margin:10px; margin-right:0px; width:150px;">
+                <button id="btnsearch" class="btn btn-info" style="float:left; margin:10px;margin-right:0px;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                @if (Session["nguoidung"] != null) //có dang nh?p
+                {
+                    <div style="float:left; margin:10px; margin-right:0px; width:60px; height:30px;">
+                        <a href="/Cart/ViewCart" class="glyphicon glyphicon glyphicon-shopping-cart" style="font-size:25px; color:white; cursor:pointer;float:left; text-decoration:none;" aria-hidden="true"></a>
+                        <p data-bind="html:'(' + tongsoluong() + ')'" style="font-size:15px; float:left;color:white; margin-top:3px;"></p>
+                    </div>
+                }
+                <ul class="nav navbar-nav navbar-right" style="cursor:pointer;">
+                    @{
+                        if (Session["nguoidung"] != null) //có dang nh?p
+                        {
+                            var x = (NGUOI_DUNG)Session["nguoidung"];
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria expanded="false" style="cursor:pointer;">
+                                    Chào,@x.USERNAME<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    @{if (x.IDQH == 0) //là nguoi qu?n lý
+                                    {
+                                        <li><a href="/Admin/Index">Quản lý Rosie Million's Store </a></li>
+                                    }
+                                    }
+                                    <li style="cursor:pointer;"><a href="/Account/Account">Quản lý thông tin cá nhân</a></li>
+                                    <li style="cursor:pointer;"><a id="signout">Ðăng xuất</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li><a href="/SignUp/SignUp">Ðăng kí</a></li>
+                            //<li><a href="/Login/Login">Ðang nh?p</a></li>
+                            <li>
+                                @Html.ActionLink("Ðăng Nhập", "Login", "Login", null, new { @class = "openPopup", data_dialog_id = "popuplDialog", data_dialog_title = "Popup" })
+                            </li>
+
+
+                        }
+                    }
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Header -->
+    <!-- /.intro-header -->
+    <!-- carousel-->
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="margin-bottom:10px;">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+        @{
+            wthEntities db = new wthEntities();
+            var list = db.SLIDERs.ToList();
+        }
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            @{
+                if (list.Count > 0)
+                {
+                    <div class="item active">
+                        <img alt="@list[0].TITLE" src="~/Image/Sach/@list[0].HINH" style="width:100%; height:300px;">
+                        <div class="carousel-caption">
+                            <h3>@list[0].TITLE</h3>
+                            <p>@list[0].BODY</p>
+                        </div>
+                    </div>
+                }
+            }
+            @{
+                for (int i = 1; i < list.Count(); i++)
+                {
+                    <div class="item ">
+                        <img alt="@list[i].TITLE" style="width:100%; height:300px;" src="~/Image/Sach/@list[i].HINH">
+                        <div class="carousel-caption">
+                            <h3>@list[i].TITLE</h3>
+                            <p>@list[i].BODY</p>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+
+    <!-- Page Content -->
+    <div class="container-fluid" style="padding:0px;">
+
+        @RenderBody()
+
+
+
+    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="container-footbar">
+            <div class="row">
+                <div class=" col-lg-4 ms-footer-col">
+                    <div class="ms-footbar-block">
+                        <h3 class="ms-footbar-title">Sitemap</h3>
+                        <ul class="list-unstyled ms-icon-list three_cols">
+                            <li>
+                                <a href="index.html">
+                                    <i class="zmdi zmdi-home"></i> Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page-blog.html">
+                                    <i class="zmdi zmdi-edit"></i> Blog
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page-blog.html">
+                                    <i class="zmdi zmdi-image-o"></i> Portafolio
+                                </a>
+                            </li>
+                            <li>
+                                <a href="portfolio-filters_sidebar.html">
+                                    <i class="zmdi zmdi-case"></i> Works
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page-timeline_left2.html">
+                                    <i class="zmdi zmdi-time"></i> Timeline
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page-pricing.html">
+                                    <i class="zmdi zmdi-money"></i> Pricing
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page-about.html">
+                                    <i class="zmdi zmdi-favorite-outline"></i> About Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page-team2.html">
+                                    <i class="zmdi zmdi-accounts"></i> Our Team
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page-services.html">
+                                    <i class="zmdi zmdi-face"></i> Services
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page-faq2.html">
+                                    <i class="zmdi zmdi-help"></i> FAQ
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page-login2.html">
+                                    <i class="zmdi zmdi-lock"></i> Login
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page-contact.html">
+                                    <i class="zmdi zmdi-email"></i> Contact
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Begin MailChimp Signup Form -->
+                    <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+
+                    <div id="mc_embed_signup">
+                        <form action="//facebook.us16.list-manage.com/subscribe/post?u=b5292c8c8cf4a49dfc1293cae&amp;id=1dde968e3b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <div id="mc_embed_signup_scroll">
+                                <label for="mce-EMAIL">Subscribe to our mailing list</label>
+                                <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+                                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_b5292c8c8cf4a49dfc1293cae_1dde968e3b" tabindex="-1" value=""></div>
+                                <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--End mc_embed_signup-->
+
+                </div>
+                <div class="col-lg-4 col-md-7 ms-footer-col ms-footer-alt-color">
+                    <div class="ms-footbar-block">
+                        <h3 class="ms-footbar-title text-center mb-2">Last Articles</h3>
+                        <div class="ms-footer-media">
+                            <div class="media">
+
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <a href=" #">Lorem ipsum dolor sit expedita cumque amet consectetur adipisicing repellat</a>
+                                    </h4>
+                                    <div class="media-footer">
+                                        <span><i class="zmdi zmdi-time color-info-light"></i> August 18, 2016</span>
+                                        <span><i class="zmdi zmdi-folder-outline color-warning-light"></i><a href=" #">Design</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media">
+
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <a href=" #">Lorem ipsum dolor sit expedita cumque amet consectetur adipisicing repellat</a>
+                                    </h4>
+                                    <div class="media-footer">
+                                        <span><i class="zmdi zmdi-time color-info-light"></i> August 18, 2016</span>
+                                        <span><i class="zmdi zmdi-folder-outline color-warning-light"></i><a href=" #">Design</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media">
+
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <a href=" #">Lorem ipsum dolor sit expedita cumque amet consectetur adipisicing repellat</a>
+                                    </h4>
+                                    <div class="media-footer">
+                                        <span><i class="zmdi zmdi-time color-info-light"></i> August 18, 2016</span>
+                                        <span><i class="zmdi zmdi-folder-outline color-warning-light"></i><a href=" #">Design</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-5 ms-footer-col ms-footer-text-right">
+                    <div class="ms-footbar-block">
+                        <div class="ms-footbar-title">
+                            <span class="sitemap_block">M</span>
+                            <h3 style="display: inline-block">
+                                Mèo Mun Nắng
+                            </h3>
+                        </div>
+                        <address>
+                            <p>
+                                <i class="color-danger-light zmdi zmdi-pin mr-1"></i> 222 ADV Q5 TPHCM
+                            </p>
+                            <p>
+                                <i class="color-warning-light zmdi zmdi-map mr-1"></i> ĐHSP TPHCM
+                            </p>
+                            <p>
+                                <i class="color-info-light zmdi zmdi-email mr-1"></i>
+                                <a href="mailto:ginta15979@gmail.com">Mr Hiếu Nguyễn</a>
+                            </p>
+                            <p>
+                                <i class="color-royal-light zmdi zmdi-phone mr-1"></i>+34 123 456 7890
+                            </p>
+                            <p>
+                                <i class="color-success-light fa fa-fax mr-1"></i>+34 123 456 7890
+                            </p>
+                        </address>
+                    </div>
+                    <div class="ms-footbar-block">
+                        <h3 class="ms-footbar-title">Social Media</h3>
+                        <div class="ms-footbar-social">
+                            <a href=" #" class="btn-circle btn-facebook">
+                                <i class="zmdi zmdi-facebook"></i>
+                            </a>
+                            <a href=" #" class="btn-circle btn-twitter">
+                                <i class="zmdi zmdi-twitter"></i>
+                            </a>
+                            <a href=" #" class="btn-circle btn-youtube">
+                                <i class="zmdi zmdi-youtube"></i>
+                            </a>
+                            <br>
+                            <a href=" #" class="btn-circle btn-google">
+                                <i class="zmdi zmdi-google"></i>
+                            </a>
+                            <a href=" #" class="btn-circle btn-instagram">
+                                <i class="zmdi zmdi-instagram"></i>
+                            </a>
+                            <a href=" #" class="btn-circle btn-github">
+                                <i class="zmdi zmdi-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="copyright text-muted small">Copyright &copy; Trần Nguyễn Song Hiếu </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-104789582-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</body>
+</html>
+
+<script>
+
+
+
+
+    function ViewCatalog() {
+        window.location.href = "/Catalog/ViewCatalog";
+    }
+    $(document).ready(function () {
+        //nút logout
+        $("#signout").click(function () {
+            $.ajax({
+                url: "/Login/Logout",
+                method: "POST",
+                success: function () {
+                    window.location.href = "/Home/Index";
+                }
+            })
+        })
+        //nút search
+        $("#btnsearch").click(function () {
+            var searchname = $("#txtsearch").val();
+            //alert(searchname);
+            $.ajax({
+                url: "/Layout/EncodeName",
+                data: { s: searchname },
+                method: "post",
+                success: function (result) {
+                    window.location.href = "/Catalog/ViewCatalog/" + result;
+                }
+            })
+        })
+
+        $.ajax({
+            url: "/Layout/GetListNXB",
+            method: "post",
+            success: function (result) {
+                var html = "";
+                for (var i = 0; i < result.length; i++) {
+                    html += "<li value='" + result[i].MaNXB + "' class='nxb' style='cursor:pointer'><a>" + result[i].TenNXB + "</a></li>";
+
+                }
+                html += "<li  value='all' onclick='ViewCatalog()'><a>T?t c?</a></li>"
+                $("#nhaxuatban").html(html);
+                $(".nxb").click(function () {
+                    var id = $(this).val();
+
+
+                    $.ajax({
+                        url: "/Layout/EncodeNXB",
+                        method: "post",
+                        data: { s: id },
+                        success: function (encode) {
+                            var str = "all";
+                            if (id != "all") {
+                                str = result[id - 1].TenNXB.replace(/\ /g, '-');
+                            }
+                            //alert(encode);
+                            window.location.href = "/Catalog/ViewCatalog/" + encode + "/" + str;
+                        }
+                    })
+
+                })
+            }
+        });
+        $.ajax({
+            url: "/Layout/GetListDanhMuc",
+            method: "post",
+            success: function (result) {
+                var html = "";
+
+                for (var i = 0; i < result.length; i++) {
+                    html += "<li value='" + result[i].MaDM + "'  class='dm' style='cursor:pointer'><a>" + result[i].TenDM + "</a></li>"
+                }
+                html += "<li  value='all' onclick='ViewCatalog()'><a>Tất cả</a></li>"
+                $("#danhmuc").html(html);
+
+                $(".dm").click(function () {
+                    var id = $(this).val();
+                    if (id == 'all') { window.location.href = "/Catalog/ViewCatalog"; }
+                    $.ajax({
+                        url: "/Layout/EncodeDM",
+                        method: "post",
+                        data: { s: id },
+                        success: function (encode) {
+                            //alert(encode);
+                            var str = "all";
+                            if (id != "all") {
+                                str = result[id - 1].TenDM.replace(/\ /g, '-');
+                            }
+
+                            window.location.href = "/Catalog/ViewCatalog/" + encode + "/" + str;
+                        }
+                    })
+                })
+            }
+        });
+    })
+
+
+
+</script>

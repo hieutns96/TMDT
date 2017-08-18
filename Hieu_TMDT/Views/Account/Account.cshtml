@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Account";
+    Layout = "~/Views/Shared/_Layout_With_Car.cshtml";
+}
+
+
+
+<style>
+    .mytable tr, td {
+        padding: 10px;
+    }
+
+    .mypanel {
+        padding: 20px;
+        font-size: 15px;
+        border: 1px solid #b3cff1;
+    }
+</style>
+@{
+    NGUOI_DUNG user = new NGUOI_DUNG();
+    if (Session["nguoidung"] == null)
+    {
+        <script>window.location.href = "/Login/Login";</script>
+    }
+    else
+    {
+        user = (NGUOI_DUNG)Session["nguoidung"];
+    }
+
+}
+
+<!-- Menu list-->
+<div class="col-md-3">
+    <!--Thông tin tài khoản -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Thông tin tài khoản</h3>
+        </div>
+        <div class="list-group">
+            <a style="cursor:pointer;" class="list-group-item" id="hscn">Hồ sơ cá nhân</a>
+            <a href="/Account/ChangeEmail" class="list-group-item" id="email">Thay đổi Email</a>
+            <a href="/Account/ChangePassword" class="list-group-item" id="password">Thay đổi Password</a>
+            <a href="/Account/DSDonHang" class="list-group-item" id="donhang">Danh sách đơn hàng</a>
+        </div>
+    </div>
+    <!-- Giỏ hàng -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Giỏ hàng</h3>
+        </div>
+        <div class="list-group">
+            <a href="/Cart/ViewCart" class="list-group-item">Xem chi tiết giỏ hàng</a>
+        </div>
+    </div>
+</div>
+<div class="col-md-9">
+    <div id="hosocanhan" class="panel panel-info mypanel">
+        <div class="panel-heading"><h1>Hồ sơ cá nhân</h1></div>
+        <div class="panel-body">
+            <table class="mytable">
+                <tr>
+                    <td><b>Username:</b></td>
+                    <td>@user.USERNAME</td>
+                </tr>
+                <tr>
+                    <td><b>Email:</b></td>
+                    <td>@user.EMAIL</td>
+                </tr>
+                <tr>
+                    <td><b>Quyền hạn:</b></td>
+                    <td>
+                        @{
+                            if (user.IDQH == 0)
+                            {
+                                <span>Quản lý</span>
+                            }
+                            else
+                            {
+                                <span>Người thường</span>
+                            }
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

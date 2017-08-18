@@ -1,0 +1,83 @@
+﻿@model Hieu_TMDT.HOA_DON
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MyAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HOA_DON</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDTT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDTT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIA_CHI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIA_CHI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HO_TEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HO_TEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIEN_THOAI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIEN_THOAI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAYDATHANG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAYDATHANG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GHI_CHU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GHI_CHU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TONG_TIEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TONG_TIEN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MA_HD }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

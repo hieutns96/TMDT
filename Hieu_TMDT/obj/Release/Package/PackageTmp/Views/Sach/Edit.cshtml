@@ -1,0 +1,110 @@
+﻿@model Hieu_TMDT.SACH
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MyAdmin.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>SACH</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.MA_SACH)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MA_DM, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MA_DM)
+                @Html.ValidationMessageFor(model => model.MA_DM)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MA_NXB, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MA_NXB)
+                @Html.ValidationMessageFor(model => model.MA_NXB)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TEN_SACH, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TEN_SACH)
+                @Html.ValidationMessageFor(model => model.TEN_SACH)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GIA_BIA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GIA_BIA)
+                @Html.ValidationMessageFor(model => model.GIA_BIA)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GIA_BAN, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GIA_BAN)
+                @Html.ValidationMessageFor(model => model.GIA_BAN)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NGAY_NHAP, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NGAY_NHAP)
+                @Html.ValidationMessageFor(model => model.NGAY_NHAP)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SOLUOTMUA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SOLUOTMUA)
+                @Html.ValidationMessageFor(model => model.SOLUOTMUA)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ANHBIA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ANHBIA)
+                @Html.ValidationMessageFor(model => model.ANHBIA)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TINHTRANG, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TINHTRANG)
+                @Html.ValidationMessageFor(model => model.TINHTRANG)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LUOT_XEM, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LUOT_XEM)
+                @Html.ValidationMessageFor(model => model.LUOT_XEM)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

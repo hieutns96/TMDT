@@ -1,0 +1,27 @@
+﻿@model Hieu_TMDT.NHA_XUAT_BAN
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MyAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NHA_XUAT_BAN</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TEN_NXB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TEN_NXB)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MA_NXB }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

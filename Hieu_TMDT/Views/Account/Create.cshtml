@@ -1,0 +1,93 @@
+﻿@model Hieu_TMDT.NGUOI_DUNG
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout_temp.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>NGUOI_DUNG</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.USERNAME, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.USERNAME)
+                @Html.ValidationMessageFor(model => model.USERNAME)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PASSWORD, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PASSWORD)
+                @Html.ValidationMessageFor(model => model.PASSWORD)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDQH, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IDQH)
+                @Html.ValidationMessageFor(model => model.IDQH)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.XACTHUC, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.XACTHUC)
+                @Html.ValidationMessageFor(model => model.XACTHUC)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BARCODE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BARCODE)
+                @Html.ValidationMessageFor(model => model.BARCODE)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EMAIL, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EMAIL)
+                @Html.ValidationMessageFor(model => model.EMAIL)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HO_TEN, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HO_TEN)
+                @Html.ValidationMessageFor(model => model.HO_TEN)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DIA_CHI, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DIA_CHI)
+                @Html.ValidationMessageFor(model => model.DIA_CHI)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

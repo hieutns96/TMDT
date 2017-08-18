@@ -5,6 +5,38 @@
 }
 <link href="~/Content/Site.css" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+    .adv,.adv1 {
+        position: absolute;
+        
+    }
+    .fixed {
+        margin-top: 55px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+    .fixed1 {
+        margin-top: 55px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+    }
+    }
+</style>
+<script>
+    $(window).scroll(function(){
+        var sticky = $('.adv'),
+            scroll = $(window).scrollTop(),
+            sticky1 = $('.adv1');
+
+        if (scroll >= 1000) {sticky.addClass('fixed'); sticky1.addClass('fixed1');}
+        else {sticky.removeClass('fixed');sticky1.removeClass('fixed1');}
+    });
+
+</script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
@@ -24,8 +56,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="intro-message">
-                    <h1>Anh Siêng FPT</h1>
-                    <h3>Chuyên Sữa Chữa Sự Cố Mạng</h3>
+                    <h1>Mèo Mun Nắng</h1>
+                    <h3>Nơi Mua Sách Đáng Tin Cậy</h3>
                     <hr class="intro-divider">
                     <ul class="list-inline intro-social-buttons">
                         <li>
@@ -44,8 +76,18 @@
     </div>
     <!-- /.container -->
 </div>
+<div class="adv" style="left: 0;width:10%; ">
+    <a href="#"><img style ="width: 100%"src="https://lh5.googleusercontent.com/_PAuO_he0N0k/TYuDrmdfQMI/AAAAAAAAFCg/TgIewNJ7tfs/s512/bannerfpt.jpg" /></a>
+   
+</div><!--banner quảng cáo bên trái-->
+<div class ="adv1" style="right: 0;width:10%;  ">
+    <a href="#"><img style ="width:100%"src="https://lh5.googleusercontent.com/_PAuO_he0N0k/TYuDrmdfQMI/AAAAAAAAFCg/TgIewNJ7tfs/s512/bannerfpt.jpg"  /></a>
+
+</div><!--banner quảng cáo bên trái-->
 <!-- Menu list -->
 <div class="content" style="padding-top: 50px;">
+
+
     <div class="col-md-3">
         <!-- Tin tức -->
         <div class="panel panel-default">
@@ -154,6 +196,8 @@
             </div>
         </div>
     </div>
+
+
     <!-- Nội dung chính -->
     <div class="col-md-9">
         @RenderBody()
@@ -161,6 +205,11 @@
     </div>
 </div>
 <script>
+
+
+    function ViewCatalog() {
+        window.location.href = "/Catalog/ViewCatalog";
+    }
     $(document).ready(function () {
         @{
             string tongtien ="0";
@@ -179,4 +228,5 @@
     });
 </script>   
 <script src="~/MyScript/HomeViewModel.js"></script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5985b0f798ba1d45"></script>   
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5985b0f798ba1d45"></script> 
+

@@ -1,0 +1,37 @@
+﻿@model Hieu_TMDT.NHA_XUAT_BAN
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_MyAdmin.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>NHA_XUAT_BAN</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TEN_NXB, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TEN_NXB)
+                @Html.ValidationMessageFor(model => model.TEN_NXB)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
